@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Job Alert - Rishabh Sisodiya</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #f59e0b;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
+        .job-card, .form-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .job-card:hover, .form-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2);
+        }
+
+        .job-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fbbf24;
+            margin-bottom: 10px;
+        }
+
+        .job-detail {
+            font-size: 14px;
+            color: #e2e8f0;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .badge {
+            background: #f59e0b;
+            color: #0f172a;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Form Styles */
+        .form-card h3 {
+            font-size: 16px;
+            color: #fbbf24;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            color: #cbd5e1;
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #f59e0b;
+        }
+
+        .form-control option {
+            background: #1e293b;
+            color: white;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-call {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-call:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-wa {
+            background: #16a34a;
+            color: white;
+        }
+
+        .btn-wa:hover {
+            background: #15803d;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Local Job Alert</h1>
+            <p>सवीट शॉप, रेस्टोरेंट और अन्य लोकल जॉब्स</p>
+        </div>
+
+        <!-- Active Job Card -->
+        <div class="job-card">
+            <div class="job-title">🥮 दीवाली स्पेशल: स्वीट शॉप स्टाफ</div>
+            <div class="job-detail"><span>वेतन:</span> <strong>₹12,000 / महीना</strong></div>
+            <div class="job-detail"><span>रहना और खाना:</span> <span class="badge">बिल्कुल फ्री</span></div>
+            <div class="job-detail"><span>अवधि:</span> <strong>केवल दीवाली तक + इनाम</strong></div>
+        </div>
+
+        <!-- Job Application Form -->
+        <div class="form-card">
+            <h3>📝 नौकरी के लिए आवेदन करें</h3>
+            <form id="jobForm" onsubmit="sendToWhatsApp(event)">
+                <div class="form-group">
+                    <label for="name">आपका पूरा नाम</label>
+                    <input type="text" id="name" class="form-control" placeholder="अपना नाम लिखें" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">मोबाइल नंबर</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="अपना फोन नंबर लिखें" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="jobType">किस काम के लिए आवेदन करना है?</label>
+                    <select id="jobType" class="form-control">
+                        <option value="Diwali Sweets Shop Job">दीवाली स्वीट शॉप जॉब (₹12,000)</option>
+                        <option value="Restaurant / Hotel Job">रेस्टोरेंट / होटल जॉब</option>
+                        <option value="Other Local Job">अन्य लोकल जॉब</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-wa" style="width: 100%; margin-top: 10px;">
+                    💬 WhatsApp पर भेजें
+                </button>
+            </form>
+        </div>
+
+        <!-- Direct Contact Buttons -->
+        <div class="btn-container">
+            <a href="tel:8468966897" class="btn btn-call">📞 डायरेक्ट कॉल करें</a>
+        </div>
+
+        <div class="footer">
+            संचालक: ऋषभ सिसोदिया | संपर्क: 8468966897
+        </div>
+    </div>
+
+    <script>
+        function sendToWhatsApp(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const jobType = document.getElementById('jobType').value;
+
+            // WhatsApp Message Format
+            const message = `*नया जॉब आवेदन मिला है!*%0A%0A*नाम:* ${name}%0A*मोबाइल:* ${phone}%0A*चयनित पद:* ${jobType}`;
+            
+            // Redirect to WhatsApp number 8468966897
+            const whatsappUrl = `https://wa.me/918468966897?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+
+</body>
+  </html>
+  
